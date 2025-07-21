@@ -1,0 +1,21 @@
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
+import { Pokemon } from "../../global/interface"
+
+const baseRTDBURL = process.env.EXPO_PUBLIC_BASE_RTDB_URL
+
+export const homeAPI = createApi({
+    reducerPath: "homeAPI",
+    baseQuery: fetchBaseQuery({baseUrl:baseRTDBURL}),
+    endpoints: (builder) => ({
+        getTypes: builder.query({query: ()=>'types.json'}),
+        //getPokemonByType: TODO
+        getPokemon: builder.query({query:()=>'pokemon.json'}),
+        getHighlightedPokemon: builder.query({
+            query: ()=> 'pokemon.json?orderBy="highlight"&equalTo=true',
+            transformResponse: (response) => {
+                return Object.values(response) as Pokemon[]
+            }}) 
+    })
+})
+
+export const {useGetTypesQuery, useGetPokemonQuery, useGetHighlightedPokemonQuery} = homeAPI

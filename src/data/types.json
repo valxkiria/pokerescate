@@ -1,0 +1,99 @@
+[
+    {
+        "id": 1,
+        "name": "Normal",
+        "nombre": "Normal",
+        "color": ["#858585"]
+    },
+    {
+        "id": 2,
+        "name": "Fighting",
+        "nombre": "Lucha",
+        "color": ["#f46814"]
+    },
+    {
+        "id": 3,
+        "name": "Flying",
+        "nombre": "Volador",
+        "color": ["#28d5ff", "#858585"]
+    },
+    {
+        "id": 4,
+        "name": "Poison",
+        "nombre": "Veneno",
+        "color": ["#ac8cff"]
+    },
+    {
+        "id": 5,
+        "name": "Ground",
+        "nombre": "Tierra",
+        "color": ["#FFFF50", "#ac8cff"]
+    },
+    {
+        "id": 6,
+        "name": "Rock",
+        "nombre": "Roca",
+        "color": ["#b88100"]
+    },
+    {
+        "id": 7,
+        "name": "Bug",
+        "nombre": "Bicho",
+        "color": ["#00903e"]
+    },
+    {
+        "id": 8,
+        "name": "Ghost",
+        "nombre": "Fantasma",
+        "color": ["#8814f4"]
+    },
+    {
+        "id": 9,
+        "name": "Steel",
+        "nombre": "Acero",
+        "color": ["#717171"]
+    },
+    {
+        "id": 10,
+        "name": "Fire",
+        "nombre": "Fuego",
+        "color": ["#ff903c"]
+    },
+    {
+        "id": 11,
+        "name": "Water",
+        "nombre": "Agua",
+        "color": ["#0099cc"]
+    },
+    {
+        "id": 12,
+        "name": "Grass",
+        "nombre": "Planta",
+        "color": ["#6aff50"]
+    },
+    {
+        "id": 13,
+        "name": "Electric",
+        "nombre": "Eléctrico",
+        "color": ["#ffd128"]
+    },
+    {
+        "id": 14,
+        "name": "Psychic",
+        "nombre": "Psíquico",
+        "color": ["#ff3cff"]
+    },
+    {
+        "id": 15,
+        "name": "Ice",
+        "nombre": "Hielo",
+        "color": ["#28d5ff"]
+    },
+    {
+        "id": 16,
+        "name": "Dragon",
+        "nombre": "Dragón",
+        "color": ["#0099cc", "#ff6464"]
+    }
+
+]
