@@ -38,31 +38,35 @@ const ProfileScreen = () => {
 
 
     return (
-        <View style={styles.profileContainer}>
-            <View style={styles.imageProfileContainer}>
-                {
-                    image?
-                        <Image source={{ uri: image }} resizeMode='cover' style={styles.profileImage} />
-                        :
-                        <Text style={styles.textProfilePlaceHolder}>{user.charAt(0).toUpperCase()}</Text>
-                }
-                <Pressable onPress={pickImage} style={({ pressed }) => [{ opacity: pressed ? 0.90 : 1 }, styles.cameraIcon]} >
-                    <View style= {styles.iconContainer}>
-                        <Ionicons
+        <View style={styles.container}>
+            <View style={styles.profileContainer}>
+                <View style={styles.imageProfileContainer}>
+                    {
+                        image ?
+                            <Image source={{ uri: image }} resizeMode='cover' style={styles.profileImage} />
+                            :
+                            <Text style={styles.textProfilePlaceHolder}>{user.charAt(0).toUpperCase()}</Text>
+                    }
+                    <Pressable onPress={pickImage} style={({ pressed }) => [{ opacity: pressed ? 0.90 : 1 }, styles.cameraIcon]} >
+                        <View style={styles.iconContainer}>
+                            <Ionicons
                                 name={"pencil"}
-                                size={ 25}
-                                color = { "white"}
-                        />
-                    </View>
-                </Pressable>
+                                size={25}
+                                color={"white"}
+                            />
+                        </View>
+                    </Pressable>
+                </View>
+                <Text style={styles.profileData}>Email: {user}</Text>
+
             </View>
-            <Text style={styles.profileData}>Email: {user}</Text>           
-            <Pressable onPress={() => {clearSession(); dispatch(clearUser())}} style= {styles.logoutButton}>
-                <Text style= {styles.logoutText}>Cerrar Sesión</Text>
+
+            <Pressable onPress={() => { clearSession(); dispatch(clearUser()) }} style={styles.logoutButton}>
+                <Text style={styles.logoutText}>Cerrar Sesión</Text>
                 <Ionicons
                     name={"log-out-sharp"}
-                    size={ 20}
-                    color = { colors.primaryLight}
+                    size={20}
+                    color={colors.primaryLight}
                 />
             </Pressable>
         </View>
@@ -72,6 +76,12 @@ const ProfileScreen = () => {
 export default ProfileScreen
 
 const styles = StyleSheet.create({
+    container: {
+        flex:1,
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: 10
+    },
     profileContainer: {
         paddingTop: 32,
         justifyContent: 'center',
@@ -80,8 +90,9 @@ const styles = StyleSheet.create({
     imageProfileContainer: {
         width: 128,
         height: 128,
-        borderRadius: 128,
+        borderRadius: "50%",
         justifyContent: 'center',
+        backgroundColor: colors.primary,
         alignItems: 'center'
     },
     textProfilePlaceHolder: {
@@ -102,26 +113,26 @@ const styles = StyleSheet.create({
         height: 128,
         borderRadius: 128
     },
-    iconContainer:{
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:colors.secondary,
-        width:48,
-        height:48,
-        borderRadius:32
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+        width: 48,
+        height: 48,
+        borderRadius: 32
     },
     logoutButton: {
         flexDirection: "row",
-        padding: 16,
-        alignItems:'center',
+        padding: 14,
+        alignItems: 'center',
         paddingHorizontal: 32,
         backgroundColor: "red",
-        marginTop: 32,
+        justifyContent: "space-around",
     },
     logoutText: {
         color: colors.white,
         fontFamily: "Pixel-Light",
-        fontSize: 16,
+        fontSize: 14,
         marginEnd: 10
     },
 })

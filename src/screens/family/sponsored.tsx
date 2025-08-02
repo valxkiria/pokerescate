@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     title: {
         alignSelf: "flex-start",
         fontFamily: "Pixel-Bold",
-        fontSize: 14,
+        fontSize: 12,
         margin: 4
     }
 })
