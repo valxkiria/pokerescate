@@ -1,6 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeStack from './homeStackNavigation'
+import ProfileStack from "./profileStackNavigation";
+import FamilyStack from "./familyStackNavigation";
 
 import { colors } from '../global/colors'
 
@@ -16,6 +18,26 @@ export default function TabNavigator() {
                     tabBarIcon: ( {focused} ) => (
                         <Ionicons
                             name={ focused? "home" : "home-outline"}
+                            size={ focused? 25 : 23}
+                            color = { focused? colors.primaryContrast : colors.primary}
+                    />
+                    ) }} />
+            <Tab.Screen name="Family" component={FamilyStack} 
+                options={{headerShown: false, 
+                    tabBarShowLabel: false,
+                    tabBarIcon: ( {focused} ) => (
+                        <Ionicons
+                            name={ focused? "heart" : "heart-outline"}
+                            size={ focused? 25 : 23}
+                            color = { focused? colors.primaryContrast : colors.primary}
+                    />
+                    ) }} />
+            <Tab.Screen name="User" component={ProfileStack} 
+                options={{headerShown: false, 
+                    tabBarShowLabel: false,
+                    tabBarIcon: ( {focused} ) => (
+                        <Ionicons
+                            name={ focused? "person-circle" : "person-circle-outline"}
                             size={ focused? 25 : 23}
                             color = { focused? colors.primaryContrast : colors.primary}
                     />

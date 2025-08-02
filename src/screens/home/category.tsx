@@ -1,10 +1,10 @@
 import {FlatList, SafeAreaView, ScrollView, StyleSheet, Text} from 'react-native'
-import PokemonListCard from '../components/atoms/pokemonListCard'
+import PokemonListCard from '../../components/atoms/pokemonListCard'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../global/types'
-import { setPokemonSelected } from '../features/home/homeSlice'
+import { RootState } from '../../global/types'
+import { setPokemonSelected } from '../../features/home/homeSlice'
 
           
 export default function TypeScreen() {

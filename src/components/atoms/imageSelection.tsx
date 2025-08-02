@@ -25,9 +25,9 @@ export default function ImageSelection ({uriArray}: props) {
                 horizontal = {true}
                 keyExtractor={(item) => uriArray.indexOf(item).toString()}
                 renderItem={({item, index}) =>
-                    <Pressable onPress={() => setCurrentImage(index)} >
+                    <Pressable onPress={() => setCurrentImage(index)} style= {[styles.pressable, index === currentImage? styles.pressSelected : styles.pressToSelect]}>
                         <Image
-                            style= {[styles.smallImage, index === currentImage? styles.selected: styles.toSelect]}
+                            style= {[styles.smallImage, index !== currentImage&& styles.toSelect]}
                             source = {{uri: item}}
                         />
                     </Pressable>}
@@ -46,16 +46,26 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         padding: 10
     },
+    pressable: {
+        width: 55,
+        height: 55,
+        margin: 5,
+        justifyContent: 'center'
+    },
     smallImage: {
         width: 50,
         height: 50,
-        margin: 5
+        alignSelf: 'center'
     },
-    selected: {
+    pressSelected: {
         borderColor: colors.primaryContrast,
         borderWidth: 3
     },
+    pressToSelect: {
+        borderColor: "gray",
+        borderWidth: 2
+    },
     toSelect: {
-        backgroundColor: 'gray' 
+        opacity: .70
     }
 })

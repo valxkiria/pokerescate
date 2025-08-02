@@ -9,12 +9,18 @@ export const homeAPI = createApi({
     endpoints: (builder) => ({
         getTypes: builder.query({query: ()=>'types.json'}),
         //getPokemonByType: TODO
-        getPokemon: builder.query({query:()=>'pokemon.json'}),
+        getPokemon: builder.query({
+            query:()=>'pokemon.json',
+            transformResponse: (response) => {
+                return Object.values(response) as Pokemon[]
+            }
+        }),
         getHighlightedPokemon: builder.query({
             query: ()=> 'pokemon.json?orderBy="highlight"&equalTo=true',
             transformResponse: (response) => {
                 return Object.values(response) as Pokemon[]
-            }}) 
+            }
+        }) 
     })
 })
 

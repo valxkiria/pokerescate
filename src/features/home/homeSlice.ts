@@ -1,30 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import pokemon from "../../data/pokemon.json"
-import types from "../../data/types.json"
 import { Pokemon, Type } from "../../global/interface";
 
 const homeSlice = createSlice({
     name: "pokeAPI",
     initialState: {
-        pokemon: pokemon,
-        types: types,
+        pokemon: <Pokemon[]> [],
         typeSelected: <Type>{},
         pokemonOfType: <Pokemon[]>[],
         pokemonSelected: <Pokemon>{}
     },
     reducers: {
-            setTypeSelected: (state, action) => {
-                state.typeSelected = action.payload as Type
-            },
-            setPokemonSelected: (state, action) => {
-                state.pokemonSelected = state.pokemon.find(p => p.id === action.payload) as Pokemon
-            },
-            filterPokemon: (state) => {
-                state.pokemonOfType = state.pokemon.filter(p=> state.typeSelected.name in p.types) as Pokemon[]
-            }
+        setPokemon: (state, action) => {
+            state.pokemon = action.payload
+        },
+        setTypeSelected: (state, action) => {
+            state.typeSelected = action.payload as Type,
+            state.pokemonOfType = state.pokemon.filter((p: Pokemon) => p.types.includes(state.typeSelected.name)) as Pokemon[]
+        },
+        setPokemonSelected: (state, action) => {
+            state.pokemonSelected = action.payload as Pokemon
+        },
+
     }
 })
 
-export const {setTypeSelected, setPokemonSelected, filterPokemon} = homeSlice.actions
+export const {setPokemon, setTypeSelected, setPokemonSelected} = homeSlice.actions
 
 export default homeSlice.reducer

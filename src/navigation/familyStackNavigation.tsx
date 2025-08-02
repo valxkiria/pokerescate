@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet } from 'react-native';
-import Home from '../screens/home';
-import TypeScreen from '../screens/home/category';
 import DetailsScreen from '../screens/home/deatils';
+import SponsoringScreen from '../screens/family/sponsored';
+import TypeScreen from '../screens/home/category';
 import { colors } from '../global/colors';
 import { useSelector } from 'react-redux';
 import { RootState } from '../global/types';
@@ -11,7 +11,7 @@ import { RootState } from '../global/types';
 const Stack = createNativeStackNavigator();
 
 
-export default function HomeStack() {
+export default function FamilyStack() {
 
   const pokemonSelected = useSelector((state: RootState) => state.homeReducer.pokemonSelected)
   const typeSelected = useSelector((state: RootState) => state.homeReducer.typeSelected)
@@ -20,10 +20,9 @@ export default function HomeStack() {
     <Stack.Navigator
       screenOptions={{headerStyle: {backgroundColor: colors.primary}, headerTitleStyle: {fontFamily: 'Title-Solid', color: colors.white}, headerTitleAlign: 'center', headerTintColor: "white"} }
       >
-      <Stack.Screen name="PokeRescate" component={Home} />
-      
-      <Stack.Screen name="Type" component={TypeScreen} options={{title: typeSelected.nombre}}/>
+      <Stack.Screen name= "Sponsoring" component={SponsoringScreen} options={{title: "Familia", headerLargeTitle: true }}/>
       <Stack.Screen name= "Pokemon" component= {DetailsScreen} options={{title: pokemonSelected.name}}/>
+      <Stack.Screen name="Type" component={TypeScreen} options={{title: typeSelected.nombre}}/>
       
     </Stack.Navigator>
   );

@@ -17,7 +17,7 @@ export default function TypeItem({action, item}: props) {
             style={styles.typeButton}
             onPress={() => {
                 action()
-                navigation.navigate("Type", {type: item.name})}
+                navigation.navigate("Type")}
                 }>
             <View style={styles.typeView}>
                 <Text style={styles.buttonText}>{item.nombre}</Text>

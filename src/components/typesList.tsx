@@ -1,22 +1,20 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 
-import {ParamListBase, useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+//import {ParamListBase, useNavigation} from '@react-navigation/native';
+//import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import TypeItem from "./atoms/typeItem";
-import { useDispatch, useSelector } from "react-redux";
-import { filterPokemon, setTypeSelected } from "../features/home/homeSlice";
-import { RootState } from "../global/types";
-import { useGetTypesQuery } from "../services/home/homeAPI";
+import { useDispatch } from "react-redux";
+import { setTypeSelected } from "../features/home/homeSlice";
+import { useGetPokemonQuery, useGetTypesQuery } from "../services/home/homeAPI";
 
 
 export default function TypesList() {
-    
-    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>()
 
-    const {data: types, isLoading, error} = useGetTypesQuery(null) 
+    const {data: types, isLoading: typesLoading, error: typesError} = useGetTypesQuery(null) 
     const dispatch = useDispatch()
-    
+    const {data: pokemon, isLoading: pokemonLoading, error: pokemonError} = useGetPokemonQuery(null) 
+
     return (
         <View style = {styles.container}>
             <Text style= {styles.title}>Tipos de Pokemon</Text>
@@ -27,8 +25,7 @@ export default function TypesList() {
                 renderItem={({ item }) => (
                     <TypeItem 
                         action = {() => {
-                            dispatch(setTypeSelected(item))
-                            dispatch(filterPokemon())
+                            dispatch(setTypeSelected(item));
                             }
                         }
                         item = {item} />

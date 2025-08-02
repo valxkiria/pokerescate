@@ -1,10 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native'
+import {Dimensions, StyleSheet, Image, View} from 'react-native'
 import { colors } from '../global/colors'
 
 export default function LoadingScreen () {
     return(
         <View style = {styles.test} >
-            <Text style = {styles.test} >Loading...</Text>
+            <Image 
+                style= {styles.image}
+                source= {require('../../assets/splash-icon.png')}
+            />
         </View>
     )
 
@@ -13,10 +16,13 @@ export default function LoadingScreen () {
 const styles = StyleSheet.create({
     test: {
         flex: 1,
-        width: "100%",
-        backgroundColor: colors.primary,
-        alignSelf: 'center', 
+        backgroundColor: colors.primary, 
         alignContent: 'center',
         justifyContent: 'center'
+    },
+    image: {
+        width: Dimensions.get('window').width * .5,
+        alignSelf: 'center',
+        resizeMode: 'contain'
     }
 })

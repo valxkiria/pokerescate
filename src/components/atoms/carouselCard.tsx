@@ -29,7 +29,6 @@ export default function CarouselCardItem ( {action, navigateName, image, title, 
       key={index}
       onPress= {() => {
         action()
-        console.log(pokemonSelected)
         navigation.navigate( navigateName )} }
       >
       <View style = {styles.imageContainer}>
@@ -73,7 +72,8 @@ const styles = StyleSheet.create(
         },
         body: {
             fontSize: 14,
-            fontFamily: 'Pixel-Light'
+            fontFamily: 'Pixel-Light',
+            color: "gray"
         },
         image: {
             height: dimensions.height,

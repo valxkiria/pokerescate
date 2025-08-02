@@ -17,3 +17,16 @@ export interface Type {
     nombre: string,
     color: string[]
 }
+
+export interface PokePreview {
+    id: string,
+    name: string,
+    sprite: string,
+    startDate: string,
+    endDate?: string
+}
+
+export interface FirePreview {
+    key: string,
+    pokepreview: PokePreview
+}
