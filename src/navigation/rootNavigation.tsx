@@ -51,6 +51,8 @@ export default function RootNavigator() {
     useEffect(()=>{
         if(profilePicture){
             dispatch(setProfilePicture(profilePicture.image))
+        } else {
+            dispatch(setProfilePicture(""))
         }
     },[profilePicture])
 
