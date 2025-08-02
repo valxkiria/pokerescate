@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Image, Dimensions } from 'react-native'
 import { colors } from '../../global/colors'
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { usePutProfilePictureMutation } from '../../services/user/userAPI';
-import { setProfilePicture } from '../../features/user/userSlice';
+import { clearUser, setProfilePicture } from '../../features/user/userSlice';
 import { RootState } from '../../global/types';
+import { clearSession } from '../../db';
 
 
 const ProfileScreen = () => {
@@ -40,8 +41,7 @@ const ProfileScreen = () => {
         <View style={styles.profileContainer}>
             <View style={styles.imageProfileContainer}>
                 {
-                    image
-                        ?
+                    image?
                         <Image source={{ uri: image }} resizeMode='cover' style={styles.profileImage} />
                         :
                         <Text style={styles.textProfilePlaceHolder}>{user.charAt(0).toUpperCase()}</Text>
@@ -57,7 +57,14 @@ const ProfileScreen = () => {
                 </Pressable>
             </View>
             <Text style={styles.profileData}>Email: {user}</Text>           
-            
+            <Pressable onPress={() => {clearSession(); dispatch(clearUser())}} style= {styles.logoutButton}>
+                <Text style= {styles.logoutText}>Cerrar Sesión</Text>
+                <Ionicons
+                    name={"log-out-sharp"}
+                    size={ 20}
+                    color = { colors.primaryLight}
+                />
+            </Pressable>
         </View>
     )
 }
@@ -74,7 +81,6 @@ const styles = StyleSheet.create({
         width: 128,
         height: 128,
         borderRadius: 128,
-        backgroundColor: colors.primaryContrast,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -103,5 +109,19 @@ const styles = StyleSheet.create({
         width:48,
         height:48,
         borderRadius:32
-    }
+    },
+    logoutButton: {
+        flexDirection: "row",
+        padding: 16,
+        alignItems:'center',
+        paddingHorizontal: 32,
+        backgroundColor: "red",
+        marginTop: 32,
+    },
+    logoutText: {
+        color: colors.white,
+        fontFamily: "Pixel-Light",
+        fontSize: 16,
+        marginEnd: 10
+    },
 })
