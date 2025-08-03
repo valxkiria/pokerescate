@@ -20,11 +20,17 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFABAB"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.valxkiria.pokerescate"
     },
     "plugins": [
       "expo-font",
       "expo-sqlite"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b7c094c3-ff44-44ec-97b6-e98abd09f06c"
+      }
+    }
   }
 }
