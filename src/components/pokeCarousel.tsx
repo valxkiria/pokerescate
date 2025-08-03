@@ -1,21 +1,21 @@
 import { FlatList, StyleSheet, View, Text } from 'react-native';
 import CarouselCardItem from './atoms/carouselCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPokemonSelected } from '../features/home/homeSlice';
-import { useGetHighlightedPokemonQuery } from '../services/home/homeAPI';
+import { RootState } from '../global/types';
 
 
 
 
 export default function PokeCarousel ()  {
-  const {data: pokemon, isLoading, error} = useGetHighlightedPokemonQuery(null)
   const dispatch = useDispatch()
-  
+  const hPokemon = useSelector((state: RootState)=> state.homeReducer.highligtedPokemon)
+
   return(
     <View style={styles.container}>
       <Text style={styles.title}>Pokemon de la Semana</Text>
       <FlatList
-        data={pokemon}
+        data={hPokemon}
         horizontal= {true}
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => (

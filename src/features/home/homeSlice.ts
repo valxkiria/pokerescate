@@ -5,6 +5,8 @@ const homeSlice = createSlice({
     name: "pokeAPI",
     initialState: {
         pokemon: <Pokemon[]> [],
+        types: <Type[]> [],
+        highligtedPokemon: <Pokemon[]> [],
         typeSelected: <Type>{},
         pokemonOfType: <Pokemon[]>[],
         pokemonSelected: <Pokemon>{}
@@ -12,6 +14,12 @@ const homeSlice = createSlice({
     reducers: {
         setPokemon: (state, action) => {
             state.pokemon = action.payload
+        },
+        setTypes: (state, action) => {
+            state.types = action.payload
+        },
+        setHighlatedPokemon: (state, action) => {
+            state.highligtedPokemon = action.payload
         },
         setTypeSelected: (state, action) => {
             state.typeSelected = action.payload as Type,
@@ -24,6 +32,6 @@ const homeSlice = createSlice({
     }
 })
 
-export const {setPokemon, setTypeSelected, setPokemonSelected} = homeSlice.actions
+export const {setPokemon, setTypes, setHighlatedPokemon, setTypeSelected, setPokemonSelected} = homeSlice.actions
 
 export default homeSlice.reducer

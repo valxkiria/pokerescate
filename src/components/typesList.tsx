@@ -4,16 +4,14 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 //import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import TypeItem from "./atoms/typeItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTypeSelected } from "../features/home/homeSlice";
-import { useGetPokemonQuery, useGetTypesQuery } from "../services/home/homeAPI";
+import { RootState } from "../global/types";
 
 
 export default function TypesList() {
-
-    const {data: types, isLoading: typesLoading, error: typesError} = useGetTypesQuery(null) 
-    const dispatch = useDispatch()
-    const {data: pokemon, isLoading: pokemonLoading, error: pokemonError} = useGetPokemonQuery(null) 
+    const types = useSelector((state: RootState) => state.homeReducer.types)    
+    const dispatch = useDispatch() 
 
     return (
         <View style = {styles.container}>

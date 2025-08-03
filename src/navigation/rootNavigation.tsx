@@ -8,8 +8,8 @@ import AuthStackNavigator from "./authStackNavigation";
 import TabNavigator from "./tabNavigation";
 import { RootState } from "../global/types";
 import { setSponsoring } from "../features/family/familySlice";
-import { useGetPokemonQuery } from "../services/home/homeAPI";
-import { setPokemon } from "../features/home/homeSlice";
+import { useGetHighlightedPokemonQuery, useGetPokemonQuery, useGetTypesQuery } from "../services/home/homeAPI";
+import { setHighlatedPokemon, setPokemon, setTypes } from "../features/home/homeSlice";
 import { loadFonts } from "../global/fonts";
 import { getSession } from "../db";
 import LoadingScreen from "../screens/loading";
@@ -21,7 +21,10 @@ export default function RootNavigator() {
     const dispatch = useDispatch()
     const {data:profilePicture, isLoading: isPicLoading, error: picError} = useGetProfilePictureQuery(localId)
     const {data:sponsoring, isLoading: isSonsoringLoading, error: sponsoringError} = useGetSponsoringQuery(localId)
-    const {data:pokemon} = useGetPokemonQuery(localId)
+    const {data:pokemon, isLoading: isPokemonLoading} = useGetPokemonQuery(localId)
+    const {data: types, isLoading: isTypesLoading, error: typesError} = useGetTypesQuery(null) 
+    const {data: hPokemon, isLoading: isHPokemonLoading, error: HPokemonError} = useGetHighlightedPokemonQuery(null)
+
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const [gotUser, setGotUser] = useState(false)
 
@@ -46,7 +49,9 @@ export default function RootNavigator() {
 
     useEffect(() => {
         dispatch(setPokemon(pokemon))
-    }, [pokemon])
+        dispatch(setTypes(types))
+        dispatch(setHighlatedPokemon(hPokemon))
+    }, [pokemon, types, hPokemon])
 
     useEffect(()=>{
         if(profilePicture){
@@ -63,9 +68,7 @@ export default function RootNavigator() {
     }, [sponsoring])
 
     
-    if (!fontsLoaded) {
-        return (<LoadingScreen/>)
-    }else if (!gotUser) {
+    if (!fontsLoaded || !gotUser || isHPokemonLoading || isPicLoading || isPokemonLoading || isSonsoringLoading || isTypesLoading) {
         return (<LoadingScreen/>)
     }else 
         return (

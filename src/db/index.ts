@@ -14,7 +14,7 @@ export const initSessionTable = async () => {
     await initDB()
     await db.execAsync('CREATE TABLE IF NOT EXISTS sessions (id INTERGER PRIMARY KEY NOT NULL, email TEXT NOT NULL, localId TEXT NOT NULL);')
   } catch (error) {
-    console.log("Error al inicializar la base de datos. error: ", error)
+    console.error("Error al inicializar la base de datos. error: ", error)
   }
 }
 
@@ -22,7 +22,7 @@ export const saveUserInDB = async (email: string, localId: string) => {
     try {
         const result = await db.runAsync('INSERT INTO sessions (id, email, localId) VALUES (?,?,?)', Math.random(), email, localId)
     } catch (error) {
-        console.log("Error al guardar el usuario en la base de datos: ", error)
+        console.error("Error al guardar el usuario en la base de datos: ", error)
     }
 }
 

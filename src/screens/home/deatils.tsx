@@ -37,7 +37,6 @@ export default function DetailsScreen () {
     const myTypes = types.filter(t => myPokemon.types.includes(t.name)) as Type[]
 
     const isSponsoring = sponsoring?.find(p => p[1].id == myPokemon.id)
-    console.log(isSponsoring)
 
     // Should go on separate function
     useEffect(()=> {
