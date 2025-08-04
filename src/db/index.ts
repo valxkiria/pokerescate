@@ -5,7 +5,7 @@ let db: SQLite.SQLiteDatabase
 
 export const initDB = async () => {
     if (!db) {
-        db = await SQLite.openDatabaseAsync('mundogeek.db');
+        db = await SQLite.openDatabaseAsync('pokerescate.db');
     }
 }
 
@@ -34,5 +34,5 @@ export const getSession = async () => {
 
 export const clearSession = async () => {
     await initDB();
-    await db.runAsync('DELETE FROM session;'); // Se borra TODA la tabla
+    await db.runAsync('DELETE FROM sessions;'); // Se borra TODA la tabla
 };
