@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput, Pressable, Dimensions } from 'react-native'
-import { useEffect, useRef} from 'react';
+import { useEffect, useRef, useState} from 'react';
 import { useLoginMutation } from '../../services/auth/authAPI';
 import { setUser } from '../../features/user/userSlice';
 import { useDispatch } from 'react-redux';
@@ -15,7 +15,9 @@ const textInputWidth = Dimensions.get('window').width * 0.7
 export default function LoginScreen () {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
-    const db = useSQLiteContext()
+    const [isFieldEmpty, setIsFieldEmpty] = useState(false)
+    const [isInvaligLogin, setIsInvadilLogin] = useState(false)
+
     const emailRef = useRef("")
     const passwordRef = useRef("")
     const [triggerLogin, result] = useLoginMutation()
@@ -28,13 +30,22 @@ export default function LoginScreen () {
     }    
 
     useEffect(()=>{
+        setIsFieldEmpty(false)
+        setIsInvadilLogin(false)
+
         async function saveUser() {
             if(result.status==="fulfilled"){
                 dispatch(setUser({email: result.data.email, localId: result.data.localId}))
                 await saveUserInDB(result.data.email, result.data.localId)
             }
         }
-        saveUser()    
+        if (result.status === "rejected"){
+            if(emailRef.current.trim() === "" || passwordRef.current === "") {
+                setIsFieldEmpty(true)
+            } else  {
+                setIsInvadilLogin(true)
+            }
+        } else {saveUser()}
     },[result])
 
 
@@ -44,29 +55,30 @@ export default function LoginScreen () {
             <Text style={styles.title}>Pokerescate</Text>
             <Text style={styles.subTitle}>Inicia sesión</Text>
             <View style={styles.inputContainer}>
+                {
+                    isFieldEmpty && <Text style={styles.errorText}>Todos los campos deben estar completos</Text>
+                }
+                {
+                    isInvaligLogin && <Text style={styles.errorText}>Email y Contraseña no son válidos</Text>
+                }
                 <TextInput
                     onChangeText={(text) => emailRef.current= text}
                     placeholderTextColor={colors.primary}
                     placeholder="Email"
-                    style={styles.textInput}
+                    style={[styles.textInput, isFieldEmpty && styles.errorInput, isInvaligLogin && styles.errorInput]}
                 />
                 <TextInput
                     onChangeText={(text) => passwordRef.current=text}
                     placeholderTextColor={colors.primary}
                     placeholder='Contraseña'
-                    style={styles.textInput}
+                    style={[styles.textInput, (isFieldEmpty || isInvaligLogin)&& styles.errorInput]}
                     secureTextEntry
                 />
             </View>
             <View style={styles.footTextContainer}>
                 <Text style={styles.whiteText}>¿No tienes una cuenta?</Text>
                 <Pressable onPress={() => navigation.navigate('Signup')}>
-                    <Text style={
-                        {
-                            ...styles.whiteText,
-                            ...styles.underLineText
-                        }
-                    }>
+                    <Text style={[styles.whiteText, styles.underLineText]}>
                         Crea una
                     </Text>
                 </Pressable>
@@ -107,8 +119,7 @@ const styles = StyleSheet.create({
         padding: 8,
         paddingLeft: 16,
         backgroundColor: colors.white,
-        width: textInputWidth,
-        
+        width: Dimensions.get("window").width * .8,
         color: colors.black,
     },
     footTextContainer: {
@@ -136,9 +147,11 @@ const styles = StyleSheet.create({
         fontFamily: "Pixel-Light",
         fontSize: 16,
     },
-    error: {
-        padding: 16,
-        backgroundColor: "red",
-        color: colors.white
+    errorInput: {
+        borderWidth: 1,
+        borderColor: "red",
+    },
+    errorText: {
+        color: "red",
     }
 })
