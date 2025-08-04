@@ -1,5 +1,5 @@
 # POKERESCATE
-![Icono de Pokerescate](../assets/icon-small.png)
+![Icono de Pokerescate](./assets/icon-small.png)
 
 &emsp;Esta es una app de expo con react-native para el curso de Desarrollo de Aplicaciones de Coderhouse. El proyecto es un mock de una app para refugios con el objetivo de recaudar fondos a través de donaciones mensuales a modo de patrocinio de animales individuales. 
 
